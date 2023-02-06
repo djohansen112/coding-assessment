@@ -1,5 +1,10 @@
 import java.util.*;
 
+/*Challenge  1 implements a basic program that can maintain a garage of cars
+ * for consideration in Automation stream training program
+ *  Author Dan Johansen
+*/
+
 public class Challenge1 {
 			
 	ArrayList<Vehicle> garage; //= new ArrayList<Vehicle>();

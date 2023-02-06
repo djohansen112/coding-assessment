@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
+
+/* New vehicle object that creates a car type object. Takes two constructors - one for new and one for used vehicles. 
+ * Maintains a service record per instance of each Major, Minor and Tyre service done
+*/
 public class Vehicle {
 	
 	List<int[]> serviceHistory = new ArrayList<int[]>();

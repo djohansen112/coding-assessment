@@ -1,18 +1,17 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//import java.util.*;
-
 public class BasicChallenge {
 	
 	//Globals
-	ArrayList<Vehicle> garage;	
-	static int menu = 0;
-	static Scanner input = new Scanner(System.in);
+	ArrayList<Vehicle> garage;  //initialised the garage for the main method to use
+	static int menu = 0; //holds the menu selection for the main menu
+	static Scanner input = new Scanner(System.in); //initialise the Scanner object, a single instantiation is used, then closed at the end rather than making multiple
 	
+	//Begin methods
 	public static int displayMenu() { //displays a menu and returns a selection
 		
-		int temp = 0;
+		int temp = 0; //returns this at the end
 		
 		System.out.println("Please select from the following menu:");
 		System.out.println("1. Create new vehicle");
@@ -23,9 +22,7 @@ public class BasicChallenge {
 		System.out.println("6. Exit");
 
 		try {
-			
 			temp = input.nextInt();
-		
 		} catch(Exception e) {
 			System.out.println("An error occured!");
 			System.exit(0);
@@ -34,7 +31,7 @@ public class BasicChallenge {
 		return temp;					
 	}
 	
-	public static Vehicle newVehicle(int isNew){ //creates a new vehicle entry and returns the instance
+	public static Vehicle newVehicle(int isNew){ //creates a new vehicle object and returns the instance
 		
 		String newType = "";
 		int temp = 0;
@@ -116,7 +113,8 @@ public class BasicChallenge {
 		
 	}//end newVehicle()	
 	
-		
+	
+	//Begin MAIN method
 	public static void main(String[] args) { //Main method
 		
 		//create a garage for the vehicles
@@ -153,23 +151,22 @@ public class BasicChallenge {
 								
 					}
 					System.out.println("------------------------------------------------------------");
-					
 					break;
-				case 5:
+				case 5: //List service history of vehicles
 					System.out.println("Please select a vehicle to list the service history:");
 					int serviceIndex = input.nextInt();
 					garage.get(serviceIndex).getService();
 					break;
-				case 6:
+				case 6: //exit the app
 					System.out.println("Thanks for using the app");
 					System.exit(0);
 				default:
 					System.out.println("Not a valid response, please try again");
 			}
-		} 
-		
-		input.close();
-	}
-		
-}
+		}//end menu loop
+
+		input.close(); //clean up the open Scanner
+	
+	} //end main
+} //end BasicChallenge class
 

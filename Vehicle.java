@@ -3,11 +3,13 @@ import java.util.List;
 
 
 /* New vehicle object that creates a car type object. Takes two constructors - one for new and one for used vehicles. 
+ * Takes an updated mileage and works out service history
  * Maintains a service record per instance of each Major, Minor and Tyre service done
+ * 
 */
 public class Vehicle {
 	
-	List<int[]> serviceHistory = new ArrayList<int[]>();
+	protected List<int[]> serviceHistory = new ArrayList<int[]>();
 	private String type = "INVALID";
 	private int tyres = 0;
 	private int valuation = 0;
@@ -35,7 +37,7 @@ public class Vehicle {
 		System.out.println("Used vehicle added to garage\n");
 	}
 	
-	//************getters************
+//**********************getters***********************
 	public String getType() {
 		return type;
 	}
@@ -54,9 +56,13 @@ public class Vehicle {
 	
 	public void getService() {
 		
-		for (int i = 0; i <= serviceHistory.size(); i++) { 
+		for (int i = 0; i < serviceHistory.size(); i++) { 
 	
+			if(serviceHistory.get(i)[0] > 0 || serviceHistory.get(i)[1] > 0 || serviceHistory.get(i)[2] > 0){
 			System.out.println("Service history for " + getType() + " with index " + i);
+			} else {
+				System.out.println("No service history recorded");
+			}
 			
 			if(serviceHistory.get(i)[0] > 0)
 			System.out.println("Minor Service at:" + serviceHistory.get(i)[0]);
@@ -70,7 +76,7 @@ public class Vehicle {
 		}
 	}
 	
-	//************setters************
+//********************setters*********************
 	private void setTyres(String type) {
 			
 		if(type == "Truck")
@@ -86,12 +92,11 @@ public class Vehicle {
 	public void setMileage(int newMileage) { //updates mileage and performs interval history calculations
 
 		int updateValue = 0;
-		
 		int newMinor = 0;
 		int newMajor = 0;
 		int newTyres = 0;
-		//get the vehicle mileage and add it to the vehicle unless it is smaller than current miles
 		
+		//get the vehicle mileage and add it to the vehicle unless it is smaller than current miles
 		if(newMileage < mileage) {
 			System.out.println("It looks like you have not entered a valid mileage update.");
 		}
@@ -118,14 +123,14 @@ public class Vehicle {
 				System.out.println("No maintenance required");
 			}
 			
-
+			//create a service history array with current updates
 			int[] serviceRecord = {newMinor, newMajor, newTyres};
 			
 			serviceHistory.add(serviceRecord);
 			
 			
 			//Update valuation once it completes first depreciation interval
-			if(mileage>15000) {		
+			if(mileage >= 15000) {		
 				
 				for(int valueMileage = 0; valueMileage <= mileage; valueMileage += 15000) {
 					
@@ -140,10 +145,12 @@ public class Vehicle {
 					System.out.println("Time to retire this vehicle. Scrap value only");
 					valuation = 0;
 				}
-			}
+			}// end valuation if
 			
 		System.out.println("Mileage updated");	
-	}}
-	
-	
+		
+		}//end update mileage if
+
+	}//end setMileage() method
+		
 } //end Vehicle class
